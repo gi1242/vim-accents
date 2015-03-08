@@ -1,7 +1,7 @@
-" Vim macro to automatically expand accents
+" Vim plugin to automatically expand accents
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Sun 08 Mar 2015 02:20:14 PM EDT
-" Last Changed:	Sun 08 Mar 2015 03:08:26 PM EDT
+" Last Changed:	Sun 08 Mar 2015 03:33:31 PM EDT
 " Version:	0.1
 "
 " Description:
