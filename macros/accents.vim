@@ -1,7 +1,7 @@
 " Vim plugin to automatically expand accents
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Sun 08 Mar 2015 02:20:14 PM EDT
-" Last Changed:	Sun 08 Mar 2015 03:33:31 PM EDT
+" Last Changed:	Mon 09 Mar 2015 04:22:06 PM EDT
 " Version:	0.1
 "
 " Description:
@@ -16,39 +16,78 @@
 "   The current abbreviation list is woefully incomplete (but is what I use
 "   most often). Feel free to add to it (and send me a patch).
 
-if &ft == 'tex'
-    function! s:tex_or_digraph( ab, tex, digraph )
-	exec 'iab <buffer>' a:ab a:tex
-    endfunction
-else 
-    function! s:tex_or_digraph( ab, tex, digraph )
-	exec 'iab <buffer>' a:ab a:digraph
-    endfunction
-endif
+let s:digraph_replacements = {
+	    \ '\\''(\{.\}|[^{])'    : '<c-k>\1''',
+	    \ '\\\=(\{.\}|[^{])'    : '<c-k>\1-',
+	    \ '\\\^(\{.\}|[^{])'    : '<c-k>\1>',
+	    \ '\\\.(\{.\}|[^{])'    : '<c-k>\1.',
+	    \ '\\`(\{.\}|[^{])'	    : '<c-k>\1`',
+	    \ '\\"(\{.\}|[^{])'     : '<c-k>\1:',
+	    \ '\\G\s+(.)'	    : '<c-k>\1"',
+	    \ '\\G\{(.)\}'	    : '<c-k>\1"',
+	    \ '\\k\s+(.)'	    : '<c-k>\1;',
+	    \ '\\k\{(.)\}'	    : '<c-k>\1;',
+	    \ '\\u\s+(.)'	    : '<c-k>\1(',
+	    \ '\\u\{(.)\}'	    : '<c-k>\1(',
+	    \ '\\v\s+(.)'	    : '<c-k>\1<',
+	    \ '\\v\{(.)\}'	    : '<c-k>\1<',
+	    \ }
+
+function! s:get_digraph( tex )
+    let dig = a:tex
+    for pat in keys( s:digraph_replacements )
+	let dig = substitute( dig, '\v'.pat, s:digraph_replacements[pat], 'g' )
+    endfor
+
+    return dig
+endfunction
+
+function! s:strip_accents( tex )
+    let plain = a:tex
+    for pat in keys( s:digraph_replacements )
+	let plain = substitute( plain, '\v'.pat, '\1', 'g' )
+    endfor
+    return plain
+endfunction
+
+function! s:tex_or_digraph( tex, ... )
+    let ab = ( a:0 > 0 && a:1 != 'NONE' ) ? a:1 : s:strip_accents( a:tex )
+
+    if &ft == 'tex'
+	exec 'iab <buffer>' ab a:tex
+    else
+	let digraph = ( a:0 > 1 ? a:2 : s:get_digraph( a:tex ) )
+	exec 'iab <buffer>' ab digraph
+    endif
+endfunction
 
 command! -nargs=+ Aab	:call s:tex_or_digraph( <f-args> )
 
 " Common math terms with accents
-Aab cadlag	c\`adl\`ag	    c<c-k>`adl<c-k>`ag
+Aab c\`adl\`ag
 
-" Common Math names with accents
-Aab Calderon	Calder\'on	    Calder<c-k>'on
-Aab Cesaro	Ces\`aro	    Ces<c-k>`aro
-Aab Cordoba	C\'ordoba	    C<c-k>'ordoba
-Aab Fejer	Fej\'er		    Fej<c-k>'er
-Aab Holder	H\<c-v>"older	    H<c-k>:older
-Aab Hormander	H\<c-v>"ormander    H<c-k>:ormander
-Aab Ito		It\^o		    It<c-k>^o
-Aab Levy	L\'evy		    L<c-k>'evy
-Aab Peclet	P\'eclet	    P<c-k>'eclet
-Aab Poincare	Poincar\'e	    Poincar<c-k>'e
-Aab Rozovskii	Rozovski\u\i{}	    Rozovski<c-k>(i
-Aab Sverak	\v\ Sver\'ak	    <c-k><Sver<c-k>'ak
-Aab Szego	Szeg\<c-v>"o	    Szeg<c-k>:o
-Aab Zlatos	Zlato\v\ s	    Zlato<c-k><vs
+"" Common Math names with accents
+Aab Calder\'on
+Aab Carath\'eodory
+Aab \v\ Centsov
+Aab Ces\`aro
+Aab C\'ordoba
+Aab Fej\'er
+Aab H\"older
+Aab H\"ormander
+Aab It\^o
+Aab L\'evy
+Aab P\'eclet
+Aab Poincar\'e
+Aab Rozovski\u\i{}  Rozovskii	    Rozovski<c-k>(i
+Aab Ser\"egin
+Aab Slep\v\ cev
+Aab \v\ Sver\'ak
+Aab Szeg\"o
+Aab Zlato\v\ s
 
-" Other common words with accents
-Aab Jenee	Jen\'ee		    Jen<c-k>'ee
-Aab cafe	caf\'e		    caf<c-k>'e
-Aab Cafe	Caf\'e		    Caf<c-k>'e
-Aab fiancee	fianc\'ee	    fianc<c-k>'ee
+"" Other common words with accents
+Aab Jen\'ee
+Aab caf\'e
+Aab Caf\'e
+Aab fianc\'ee
