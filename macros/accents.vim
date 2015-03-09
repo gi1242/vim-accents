@@ -1,7 +1,7 @@
 " Vim plugin to automatically expand accents
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Sun 08 Mar 2015 02:20:14 PM EDT
-" Last Changed:	Mon 09 Mar 2015 04:22:06 PM EDT
+" Last Changed:	Mon 09 Mar 2015 04:41:04 PM EDT
 " Version:	0.1
 "
 " Description:
@@ -31,6 +31,7 @@ let s:digraph_replacements = {
 	    \ '\\u\{(.)\}'	    : '<c-k>\1(',
 	    \ '\\v\s+(.)'	    : '<c-k>\1<',
 	    \ '\\v\{(.)\}'	    : '<c-k>\1<',
+	    \ '\\(O)'		    : '<c-k>O/',
 	    \ }
 
 function! s:get_digraph( tex )
@@ -69,7 +70,6 @@ Aab c\`adl\`ag
 "" Common Math names with accents
 Aab Calder\'on
 Aab Carath\'eodory
-Aab \v\ Centsov
 Aab Ces\`aro
 Aab C\'ordoba
 Aab Fej\'er
@@ -77,13 +77,15 @@ Aab H\"older
 Aab H\"ormander
 Aab It\^o
 Aab L\'evy
+Aab \Oksendal
 Aab P\'eclet
 Aab Poincar\'e
 Aab Rozovski\u\i{}  Rozovskii	    Rozovski<c-k>(i
 Aab Ser\"egin
 Aab Slep\v\ cev
-Aab \v\ Sver\'ak
 Aab Szeg\"o
+Aab \v\ Centsov
+Aab \v\ Sver\'ak
 Aab Zlato\v\ s
 
 "" Other common words with accents
