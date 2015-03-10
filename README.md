@@ -5,7 +5,15 @@ For example, typing `Poincare` will result in `Poincar\'e` if you are editing a
 `TeX/LaTeX` file, and `Poincaré` otherwise. (The accented abbreviations use
 digraphs to make it encoding independent.)
 
-By default, only abbreviations for Poincaré and càdlàg are defined.
+By default, only abbreviations for Poincaré and càdlàg are defined. All
+abbreviations I personally use are defined (but not enabled) in
+`macros/accents.vim`, and you can enable it using
+
+        au FileType plaintex,tex,html,mmd,markdown,mediawiki,ikiwiki,mail,text
+            \ runtime macros/accents.vim
+
+If you add to this list using common words (that will likely not cause
+conflicts), then please send me a patch.
 
 ## Defining your own abbreviations.
 
