@@ -1,7 +1,7 @@
 " Accents to automatically expand.
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Mon 09 Mar 2015 10:11:40 PM EDT
-" Last Changed:	Wed 11 Mar 2015 02:10:47 PM EDT
+" Last Changed:	Mon 30 Mar 2015 12:13:58 PM EDT
 
 if !exists( ':Aab' )
     " accents.vim not loaded. Do nothing.
@@ -35,3 +35,7 @@ Aab Jen\'ee
 Aab caf\'e
 Aab Caf\'e
 Aab fianc\'ee
+Aab jalape\~no
+Aab Jalape\~no
+Aab jalape\~nos
+Aab Jalape\~nos
