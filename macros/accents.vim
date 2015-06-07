@@ -1,7 +1,7 @@
 " Accents to automatically expand.
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Mon 09 Mar 2015 10:11:40 PM EDT
-" Last Changed:	Mon 30 Mar 2015 12:13:58 PM EDT
+" Last Changed:	Fri 05 Jun 2015 05:25:47 PM EDT
 
 if !exists( ':Aab' )
     " accents.vim not loaded. Do nothing.
@@ -9,6 +9,7 @@ if !exists( ':Aab' )
 endif
 
 " Common Math names with accents
+Aab Bienaym\'e
 Aab Calder\'on
 Aab Carath\'eodory
 Aab Ces\`aro
