@@ -1,7 +1,7 @@
 " Vim plugin to automatically expand accents
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Sun 08 Mar 2015 02:20:14 PM EDT
-" Last Changed:	Mon 30 Mar 2015 12:12:05 PM EDT
+" Last Changed:	Wed 17 Jun 2015 10:46:29 AM CDT
 " Version:	0.1
 "
 " Description:
@@ -16,23 +16,25 @@
 "   The current abbreviation list is woefully incomplete (but is what I use
 "   most often). Feel free to add to it (and send me a patch).
 
+" Put the accent char first, so it falls back gracefully if it's
+" not supported
 let s:digraph_replacements = {
-	    \ '\\''(\{.\}|[^{])'    : '<c-k>\1''',
-	    \ '\\\=(\{.\}|[^{])'    : '<c-k>\1-',
-	    \ '\\\^(\{.\}|[^{])'    : '<c-k>\1>',
+	    \ '\\''(\{.\}|[^{])'    : '<c-k>''\1',
+	    \ '\\\=(\{.\}|[^{])'    : '<c-k>-\1',
+	    \ '\\\^(\{.\}|[^{])'    : '<c-k>>\1',
+	    \ '\\\~(\{.\}|[^{])'    : '<c-k>~\1',
+	    \ '\\`(\{.\}|[^{])'	    : '<c-k>`\1',
+	    \ '\\"(\{.\}|[^{])'     : '<c-k>:\1',
+	    \ '\\G\s+(.)'	    : '<c-k>"\1',
+	    \ '\\G\{(.)\}'	    : '<c-k>"\1',
+	    \ '\\k\s+(.)'	    : '<c-k>;\1',
+	    \ '\\k\{(.)\}'	    : '<c-k>;\1',
+	    \ '\\u\s+(.)'	    : '<c-k>(\1',
+	    \ '\\u\{(.)\}'	    : '<c-k>(\1',
+	    \ '\\v\s+(.)'	    : '<c-k><\1',
+	    \ '\\v\{(.)\}'	    : '<c-k><\1',
+	    \ '\\(O)'		    : '<c-k>/O',
 	    \ '\\\.(\{.\}|[^{])'    : '<c-k>\1.',
-	    \ '\\\~(\{.\}|[^{])'    : '<c-k>\1~',
-	    \ '\\`(\{.\}|[^{])'	    : '<c-k>\1`',
-	    \ '\\"(\{.\}|[^{])'     : '<c-k>\1:',
-	    \ '\\G\s+(.)'	    : '<c-k>\1"',
-	    \ '\\G\{(.)\}'	    : '<c-k>\1"',
-	    \ '\\k\s+(.)'	    : '<c-k>\1;',
-	    \ '\\k\{(.)\}'	    : '<c-k>\1;',
-	    \ '\\u\s+(.)'	    : '<c-k>\1(',
-	    \ '\\u\{(.)\}'	    : '<c-k>\1(',
-	    \ '\\v\s+(.)'	    : '<c-k>\1<',
-	    \ '\\v\{(.)\}'	    : '<c-k>\1<',
-	    \ '\\(O)'		    : '<c-k>O/',
 	    \ }
 
 function! s:get_digraph( tex )
