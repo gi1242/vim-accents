@@ -1,7 +1,7 @@
 " Accents to automatically expand.
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Mon 09 Mar 2015 10:11:40 PM EDT
-" Last Changed:	Fri 05 Jun 2015 05:25:47 PM EDT
+" Last Changed:	Sat 04 Jul 2015 01:46:56 PM CDT
 
 if !exists( ':Aab' )
     " accents.vim not loaded. Do nothing.
@@ -20,9 +20,10 @@ Aab H\"older
 Aab H\"ormander
 Aab It\^o
 Aab L\'evy
-Aab \Oksendal
+Aab \O\ ksendal
 Aab P\'eclet
 Aab Rozovski\u\i{}  Rozovskii	    Rozovski<c-k>(i
+Aab S\o\ lna
 Aab Schr\"odinger
 Aab Ser\"egin
 Aab Slep\v\ cev

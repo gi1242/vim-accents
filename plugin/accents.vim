@@ -1,7 +1,7 @@
 " Vim plugin to automatically expand accents
 " Maintainer:	GI <gi1242+vim@nospam.com> (replace nospam with gmail)
 " Created:	Sun 08 Mar 2015 02:20:14 PM EDT
-" Last Changed:	Wed 17 Jun 2015 10:46:29 AM CDT
+" Last Changed:	Sat 04 Jul 2015 01:46:30 PM CDT
 " Version:	0.1
 "
 " Description:
@@ -33,7 +33,7 @@ let s:digraph_replacements = {
 	    \ '\\u\{(.)\}'	    : '<c-k>(\1',
 	    \ '\\v\s+(.)'	    : '<c-k><\1',
 	    \ '\\v\{(.)\}'	    : '<c-k><\1',
-	    \ '\\(O)'		    : '<c-k>/O',
+	    \ '\\([Oo])\s+'	    : '<c-k>/\1',
 	    \ '\\\.(\{.\}|[^{])'    : '<c-k>\1.',
 	    \ }
 
